@@ -36,7 +36,7 @@ for row in reader:
         wr=-(High_n-close)/(High_n-Low_n)
         #print(wr)
         #不做放空
-        if( wr>=-1 and wr<-0.8 and hold==0 and row_count>1):
+        '''if( wr>=-1 and wr<-0.8 and hold==0 and row_count>1):
             #市場超賣時買入
             hold=hold+1
             write.writerow([1])
@@ -46,6 +46,21 @@ for row in reader:
             write.writerow([1])
         elif(wr>-0.2 and wr<=-0 and hold==1 and row_count>1):
             #市場超買時賣出
+            hold=hold-1
+            write.writerow([-1])
+        elif(row_count>1):
+            write.writerow([0])'''
+        #放空
+        if( wr>=-1 and wr<-0.8 and hold==0 and row_count>1):
+            #市場超賣時買入
+            hold=hold+1
+            write.writerow([1])
+        elif( wr<=-0.2 and wr>=-0.8 and hold==0 and row_count>1):
+            #威廉交易訊號
+            hold=hold+1
+            write.writerow([1])
+        elif(wr>-0.2 and wr<=-0 and hold>=0 and row_count>1):
+            #市場超買時賣出允許放空一張
             hold=hold-1
             write.writerow([-1])
         elif(row_count>1):
